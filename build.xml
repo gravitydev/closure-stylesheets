@@ -182,8 +182,8 @@
        repository.
   -->
   <property name="maven-repository-url"
-            value="https://oss.sonatype.org/service/local/staging/deploy/maven2/" />
-  <property name="maven-repository-id" value="sonatype-nexus-staging" />
+            value="http://local.gravitydev.com/app/repos/" />
+  <property name="maven-repository-id" value="GravityDev Repos" />
 
   <target name="pom" depends="yyyymmdd">
     <dirname property="pom.xml.dir" file="${pom.xml}" />
@@ -235,17 +235,29 @@
     depends="mvn-install"
     description="Signs and deploys Closure Stylesheets artifacts to the central Maven repository.">
 
+    <artifact:mvn>
+      <arg value="deploy" />
+      <arg value="-Durl=${maven-repository-url}" />
+      <arg value="-DrepositoryId=${maven-repository-id}" />
+      <arg value="-DpomFile=${pom.xml}" />
+      <arg value="-Dfile=${mvn-nodeps.jar}" />
+    </artifact:mvn>
+
     <!-- Sign and deploy the main artifact. -->
+    <!--
     <artifact:mvn>
       <arg value="org.apache.maven.plugins:maven-gpg-plugin:1.1:sign-and-deploy-file" />
       <arg value="-Durl=${maven-repository-url}" />
       <arg value="-DrepositoryId=${maven-repository-id}" />
       <arg value="-DpomFile=${pom.xml}" />
       <arg value="-Dfile=${mvn-nodeps.jar}" />
+      <arg value="-Dpassphrase=a" />
       <arg value="-Pgpg" />
     </artifact:mvn>
+    -->
 
     <!-- Sign and deploy the sources artifact. -->
+    <!--
     <artifact:mvn>
       <arg value="org.apache.maven.plugins:maven-gpg-plugin:1.1:sign-and-deploy-file" />
       <arg value="-Durl=${maven-repository-url}" />
@@ -253,10 +265,13 @@
       <arg value="-DpomFile=${pom.xml}" />
       <arg value="-Dfile=${mvn-sources.jar}" />
       <arg value="-Dclassifier=sources" />
+      <arg value="-Dpassphrase=a" />
       <arg value="-Pgpg" />
     </artifact:mvn>
+    -->
 
     <!-- Sign and deploy the javadoc artifact. -->
+    <!--
     <artifact:mvn>
       <arg value="org.apache.maven.plugins:maven-gpg-plugin:1.1:sign-and-deploy-file" />
       <arg value="-Durl=${maven-repository-url}" />
@@ -264,8 +279,10 @@
       <arg value="-DpomFile=${pom.xml}" />
       <arg value="-Dfile=${mvn-javadoc.jar}" />
       <arg value="-Dclassifier=javadoc" />
+      <arg value="-Dpassphrase=a" />
       <arg value="-Pgpg" />
     </artifact:mvn>
+    -->
   </target>
 
 </project>
