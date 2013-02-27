@@ -15,8 +15,12 @@ crossPaths := false
 
 libraryDependencies ++= Seq(
   "args4j" % "args4j" % "2.0.16",
-  "com.google.guava" % "guava" % "12.0",
+  "com.google.guava" % "guava" % "10.0.1",
   "com.google.code.gson" % "gson" % "1.7.1",
   "com.google.code.findbugs" % "jsr305" % "1.3.9"
 )
 
+publishTo := Some( "gravitydev" at "http://repos.gravitydev.com/app/repos/12" )
+
+publishArtifact in (Compile, packageDoc) := false
+ 
